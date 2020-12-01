@@ -31,3 +31,22 @@ jobs:
           tag_with_sha: true
           add_git_labels: true
           dockerfile: Containerfile
+  # Runs on commit pushes to master branch.
+  publish_prod:
+    runs-on: ubuntu-20.04
+    if: ${{github.ref == 'refs/heads/master'}}
+    steps:
+      - name: Clone the repo
+        uses: actions/checkout@v2
+      - name: Build and push to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+          registry: docker.pkg.github.com
+          repository: digitalbitbox/electrumx-containers/electrumx
+          tags: prod
+          tag_with_sha: true
+          add_git_labels: true
+          dockerfile: Containerfile
+          cache_froms: digitalbitbox/electrumx-containers/electrumx:latest
