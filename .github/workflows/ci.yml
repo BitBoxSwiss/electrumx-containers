@@ -13,3 +13,21 @@ jobs:
         uses: actions/checkout@v2
       - name: Build container image
         run: docker build -f Containerfile .
+  # Runs on commit pushes to staging branch.
+  publish_staging:
+    runs-on: ubuntu-20.04
+    if: ${{github.ref == 'refs/heads/staging'}}
+    steps:
+      - name: Clone the repo
+        uses: actions/checkout@v2
+      - name: Build and push to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+          registry: docker.pkg.github.com
+          repository: digitalbitbox/electrumx-containers/electrumx
+          tags: latest
+          tag_with_sha: true
+          add_git_labels: true
+          dockerfile: Containerfile
