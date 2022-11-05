@@ -3,9 +3,9 @@
 
 set -eu  # abort on first error
 
-# Tue, 10 Nov 2020 19:31:34 +0100
-VERSION=bf430353d635eeaf1d4fc0f107d6b947846e1d7f
-SHA256=f7157590349db177c974545e8e3909df59244aaa73cb910b7b4dec4b2845bd54
+# Tue, 5 Nov 2022 02:44 +0100
+VERSION=2f3e891a524df28538ba9b85a36a8bfecd22b1bd
+SHA256=577bd2da5a8cc916cdec6bcc70f71b8b0ca37e858cc0d5ec7ef0620bcca3e3d8
 SOURCE_URL=https://github.com/spesmilo/electrumx/archive/$VERSION.tar.gz
 
 cd /
